@@ -271,7 +271,16 @@ def main():
         print("❌ الرجاء وضع التوكن في المتغير BOT_TOKEN")
         return
     
-    app = Application.builder().token(BOT_TOKEN).build()
+    # إعداد الاتصال بالخادم المحلي لتجاوز حد 20 ميجابايت
+    local_server_url = f"http://localhost:8081/bot{BOT_TOKEN}"
+    
+    app = (
+        Application.builder()
+        .token(BOT_TOKEN)
+        .base_url(local_server_url)       # توجيه الطلبات للخادم المحلي
+        .local_mode(True)                 # تفعيل وضع محلي لدعم الملفات الكبيرة
+        .build()
+    )
     
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("skip", skip_cover))
@@ -279,8 +288,5 @@ def main():
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
     app.add_handler(CallbackQueryHandler(button_callback))
     
-    print("✅ البوت يعمل الآن...")
+    print("✅ البوت يعمل الآن ويدعم ملفات حتى 2GB...")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
-
-if __name__ == "__main__":
-    main()
