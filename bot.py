@@ -11,8 +11,8 @@ from telegram.ext import (
 )
 
 # ============ الإعدادات ============
-BOT_TOKEN = "ضع_التوكن_هنا"
-OWNER_ID = 123456789  # غيّره إلى ID الخاص بك
+BOT_TOKEN = "8916562038:AAFUDrPQnQ0NZIMkb7188AmhDwnypV1svws"
+OWNER_ID = 7124506900  # غيّره إلى ID الخاص بك
 
 WORK_DIR = "/content/working"
 os.makedirs(WORK_DIR, exist_ok=True)
